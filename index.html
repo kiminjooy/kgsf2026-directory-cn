@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 KGSF Directory</title>
+  <style>
+    :root{
+      --black:#111827;
+      --orange:#22582C;
+      --bg:#f7f9fc;
+      --line:#e5e7eb;
+      --muted:#6b7280;
+      --white:#fff;
+      --shadow:0 18px 50px rgba(17,24,39,.12);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--black);
+      
+font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "SimHei", sans-serif;
+    }
+    button,input,textarea{font:inherit}
+    .wrap{width:min(1120px,calc(100% - 32px));margin:0 auto;padding:48px 0 120px}
+    h1{margin:0 0 10px;font-size:42px;letter-spacing:-.04em}
+    .sub{margin:0 0 32px;color:var(--muted);line-height:1.7}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{
+      background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+      padding:22px;box-shadow:0 8px 24px rgba(17,24,39,.05);
+      display:flex;flex-direction:column;min-height:210px;
+    }
+    .category{
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .category.beauty{
+      color:#e85d8e;
+    }
+
+    .category.food{
+      color:#78a83b;
+    }
+
+    .category.home-living{
+      color:#d6cb00;
+    }
+
+    .category.healthcare{
+      color:#3b82c4;
+    }
+
+    .category.digital-industrial{
+      color:#8b5cf6;
+    }
+
+    .category-separator{
+     color:#9ca3af;
+     font-size:12px;
+     font-weight:800;
+   }
+    .card h3{margin:8px 0 8px;font-size:20px}
+    .product-preview{color:var(--muted);font-size:13px;line-height:1.6;flex:1}
+    .request-btn{
+      margin-top:18px;height:44px;border:0;border-radius:12px;background:var(--black);
+      color:#fff;font-weight:800;cursor:pointer;
+    }
+    .request-btn.added{background:#eaf2ff;color:#183153;border:1px solid #cddfff}
+
+    .card-subcategories{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+     margin:2px 0 12px;
+    }
+
+    .card-subcategory{
+      display:inline-block;
+      padding:5px 8px;
+      border-radius:999px;
+      background:#f3f4f6;
+      color:#4b5563;
+      font-size:11px;
+      font-weight:700;
+      line-height:1.2;
+    }
+    .overlay{
+      position:fixed;inset:0;background:rgba(17,24,39,.55);z-index:50;
+      display:none;align-items:center;justify-content:center;padding:20px;
+    }
+    .overlay.open{display:flex}
+    .modal{
+      width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;
+      border-radius:26px;box-shadow:0 30px 100px rgba(0,0,0,.25);
+    }
+    .modal-head{
+      position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);
+      display:flex;justify-content:space-between;align-items:center;padding:20px 24px;z-index:2;
+    }
+    .modal-head h2{font-size:21px;margin:0}
+    .close{border:0;background:#f1f3f5;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:20px}
+    .modal-body{padding:24px}
+    .field-label{display:block;font-weight:800;margin:0 0 10px}
+    .help{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.6}
+    .check-list{display:grid;gap:10px;margin-bottom:24px}
+    .check-item,.radio-item{
+      display:flex;gap:10px;align-items:center;border:1px solid var(--line);
+      border-radius:12px;padding:12px 14px;cursor:pointer;
+    }
+    .check-item input, .radio-item input{margin:0;flex-shrink:0;accent-color:#111827}
+    textarea,.text-input{
+      width:100%;border:1px solid #d7dce3;border-radius:12px;padding:13px 14px;outline:none;
+    }
+    textarea{min-height:110px;resize:vertical}
+    textarea:focus,.text-input:focus{border-color:#111827}
+    .radio-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:26px}
+    .btn{height:44px;padding:0 18px;border-radius:12px;border:0;font-weight:800;cursor:pointer}
+    .btn.secondary{background:#eef1f5;color:#111827}
+    .btn.primary{background:#111827;color:#fff}
+
+    .submit-box{
+      margin-top:22px;padding-top:22px;border-top:1px solid var(--line)
+    }
+    .submission-note{display:flex;align-items:flex-start;gap:9px;margin:16px 0 0;padding:12px 14px;background:#f7f9f5;border:1px solid #e2e9df;border-radius:10px;color:#4b5563;font-size:13px;line-height:1.6}
+    .submission-note-icon{flex-shrink:0;color:#22582C;font-size:17px;line-height:1.25}
+    .submission-note strong{color:#374151}
+    .submit-btn{
+      width:100%;height:52px;border:0;border-radius:14px;background:var(--orange);
+      color:#fff;font-weight:900;cursor:pointer;margin-top:14px;
+    }
+    .submit-btn:disabled{opacity:.45;cursor:not-allowed}
+
+    .success{
+      text-align:center;padding:50px 28px;
+    }
+    .success .icon{font-size:48px;margin-bottom:12px}
+    .success h2{margin:0 0 10px}
+    .success p{color:var(--muted);line-height:1.7}
+
+    .dev-note{
+      margin:0 0 28px;padding:15px 17px;border-radius:14px;background:#ECF8EE;
+      border:1px solid #90D49D;color:#22582C;font-size:13px;line-height:1.65;
+    }
+
+    .search-panel{
+      margin:0 0 28px;
+      padding:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 8px 24px rgba(17,24,39,.04);
+    }
+
+    .search-main{
+      position:relative;
+      margin-bottom:14px;
+    }
+
+    .search-icon{
+      position:absolute;
+      left:16px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#9ca3af;
+      font-size:19px;
+      pointer-events:none;
+    }
+
+    .search-input,
+    .filter-select{
+      width:100%;
+      height:48px;
+      border:1px solid #d7dce3;
+      border-radius:12px;
+      background:#fff;
+      outline:none;
+    }
+
+    .search-input{
+      padding:0 14px 0 46px;
+    }
+
+    .filter-select{
+      padding:0 14px;
+    }
+
+    .search-input:focus,
+    .filter-select:focus{
+      border-color:#111827;
+    }
+
+    .filter-row{
+      display:grid;
+      grid-template-columns:1fr 1fr auto;
+      gap:12px;
+    }
+
+    .reset-filter-btn{
+      height:48px;
+      padding:0 18px;
+      border:1px solid #d7dce3;
+      border-radius:12px;
+      background:#fff;
+      color:#374151;
+      font-weight:700;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .reset-filter-btn:hover{
+      background:#f3f4f6;
+    }
+
+    .active-filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .filter-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border:0;
+      background:#f3f4f6;
+      color:#374151;
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .filter-chip:hover{
+      background:#e5e7eb;
+    }
+
+    .result-count{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .card-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .meeting-badge{
+      flex-shrink:0;
+      background:#eaf2ff;
+      color:#183153;
+      border:1px solid #cddfff;
+      border-radius:999px;
+      padding:5px 9px;
+      font-size:11px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .detail-top-btn{
+      position:fixed;
+      right:28px;
+      bottom:92px;
+      z-index:19;
+      width:48px;
+      height:48px;
+      border:1px solid var(--line);
+      border-radius:50%;
+      background:#fff;
+      color:var(--black);
+      box-shadow:0 8px 24px rgba(17,24,39,.14);
+      font-size:18px;
+      font-weight:900;
+      cursor:pointer;
+      display:none;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .detail-top-btn:hover{
+      background:#f3f4f6;
+    }
+
+    .detail-top-btn.show{
+      display:flex;
+    }
+
+    .card-product-image{
+      width:100%;
+      height:145px;
+      object-fit:contain;
+      background:#f8f9fa;
+      border-radius:14px;
+      margin-bottom:16px;
+    }
+
+    .detail-subpages{
+      margin-top:16px;
+      padding:14px 0 0;
+     font-size:13px;
+      line-height:1.7;
+    }
+
+    .detail-subpage-label{
+      margin-bottom:5px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .detail-subpages a{
+      display:block;
+      color:#374151;
+      text-decoration:underline;
+      text-underline-offset:2px;
+      overflow-wrap:anywhere;
+    }
+
+    /* ============================================================
+   ACCESS CODE SCREEN
+   ============================================================ */
+
+    .access-screen{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:#f7f8fa;
+    }
+
+    .access-card{
+      width:100%;
+      max-width:460px;
+      padding:42px 36px;
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:24px;
+      box-shadow:0 18px 50px rgba(0,0,0,.07);
+      text-align:center;
+    }
+
+    .access-eyebrow{
+      margin-bottom:10px;
+      color:#6b7280;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .access-card h1{
+      margin:0 0 14px;
+      font-size:30px;
+    }
+
+    .access-card p{
+      margin:0 auto 28px;
+      max-width:370px;
+      color:#6b7280;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .access-form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .access-form input{
+      width:100%;
+      height:52px;
+      padding:0 16px;
+      border:1px solid #d1d5db;
+      border-radius:12px;
+      outline:none;
+      font-size:15px;
+      text-align:center;
+      font-weight:700;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      box-sizing:border-box;
+    }
+
+    .access-form input:focus{
+      border-color:#111827;
+      box-shadow:0 0 0 3px rgba(17,24,39,.08);
+    }
+
+    .access-form button{
+      height:52px;
+      border:0;
+      border-radius:12px;
+      background:#111827;
+      color:#fff;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .access-form button:disabled{
+      opacity:.55;
+     cursor:not-allowed;
+    }
+
+    .access-message{
+      min-height:20px;
+      margin-top:16px;
+      color:#dc2626;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .access-message.loading{
+      color:#6b7280;
+    }
+
+    @media(max-width:560px){
+      .access-card{
+        padding:34px 22px;
+        border-radius:20px;
+      }
+
+      .access-card h1{
+        font-size:26px;
+      }
+    }
+
+    .pagination{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:36px;
+    }
+
+    .page-btn{
+      min-width:40px;
+      height:40px;
+      padding:0 12px;
+      border:1px solid #d7dce3;
+      border-radius:10px;
+      background:#fff;
+      color:#374151;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .page-btn:hover{
+      background:#f3f4f6;
+    }
+
+    .page-btn.active{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .page-btn:disabled{
+      opacity:.4;
+      cursor:not-allowed;
+    }
+
+    .detail-request-btn:disabled{
+      background:#e5e7eb;
+      color:#6b7280;
+      cursor:not-allowed;
+    }
+
+    
+/* Meeting Report Matrix */
+    .report-matrix-wrap {
+      overflow-x: auto;
+      margin: 20px 0 26px;
+    }
+
+    .report-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+      table-layout: fixed;
+    }
+
+    .report-matrix th,
+    .report-matrix td {
+      padding: 14px 8px;
+      text-align: center;
+      border-bottom: 1px solid #eef0f3;
+    }
+
+    .report-matrix th:first-child,
+    .report-matrix td:first-child {
+      width: 32%;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .report-matrix th {
+      font-size: 13px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .report-matrix td {
+      font-size: 14px;
+    }
+
+    .report-matrix input[type="radio"] {
+      width: 19px;
+      height: 19px;
+      margin: 0;
+      accent-color: #111827;
+      cursor: pointer;
+    }
+
+    .report-matrix label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 32px;
+      cursor: pointer;
+    }
+
+    .report-matrix tbody tr:hover {
+      background: #f9fafb;
+    }
+
+
+    .detail-page{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}
+    .detail-topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+    .back-btn{border:0;background:#f1f3f5;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+    .detail-title{margin:0 0 8px;font-size:34px;letter-spacing:-.03em}
+    .detail-desc{color:var(--muted);line-height:1.7;white-space: pre-line}
+    .detail-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px}
+    .detail-chip{background:#f3f4f6;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
+    .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+    .detail-info{border:1px solid var(--line);border-radius:14px;padding:14px}
+    .detail-info small{display:block;color:var(--muted);margin-bottom:5px}
+    .detail-products{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:14px;margin-top:18px}
+    .detail-product{border:1px solid var(--line);border-radius:16px;padding:16px}
+    .detail-product h4{margin:0 0 8px}
+    .cert-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .cert-badge{font-size:12px;background:#ECF8EE;border:1px solid #90D49D;color:#22582C;border-radius:999px;padding:5px 8px}
+    .detail-request-btn{
+      border:0;border-radius:14px;background:var(--orange);color:#fff;font-weight:900;
+      min-height:50px;padding:0 20px;cursor:pointer;
+    }
+    .detail-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .detail-links a{display:inline-block;text-decoration:none;background:#111827;color:#fff;border-radius:10px;padding:9px 12px;font-weight:700;font-size:13px}
+
+    @media(max-width:560px){
+      .grid{grid-template-columns:1fr}
+      .filter-row,.detail-grid{grid-template-columns:1fr}
+      .reset-filter-btn{width:100%;}
+      h1{font-size:34px}
+      .radio-row{grid-template-columns:1fr}
+      .detail-top-btn{right:16px;bottom:82px;}
+    }
+    @media (max-width:700px) {
+      .detail-products { grid-template-columns:1fr; }
+    }
+
+     .product-image-fallback{min-height:170px;background:#f3f4f6;border:1px dashed #d1d5db;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#6b7280;font-size:13px;margin-bottom:16px}
+     .product-image-fallback a{color:#374151;text-decoration:underline}
+     .inline-request-section{margin-top:36px;padding:26px;border:1px solid var(--line);border-radius:18px;background:#fafbfc;scroll-margin-top:24px}
+     .inline-request-section h3{margin:0 0 10px;font-size:24px}
+     .inline-request-fields{margin-top:24px}
+     .inline-request-fields .check-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+     .inline-save-btn{  display:block;width:fit-content;margin:24px auto 0;background:var(--orange);min-height:48px;padding:0 28px;}
+     .inline-request-submitted{padding:18px;border-radius:12px;background:#ecfdf3;color:#166534;font-weight:700}
+     @media(max-width:700px){.inline-request-section{padding:18px}.inline-request-fields .check-list{grid-template-columns:1fr}.inline-save-btn{width:100%}}
+
+    /* Meeting List save confirmation */
+    .meeting-toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,16px);z-index:110;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);padding:14px 20px;border-radius:14px;background:#22582C;color:#fff;box-shadow:0 12px 36px rgba(0,0,0,.2);font-size:14px;font-weight:750;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none;text-align:center}
+    .meeting-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+    @media(max-width:700px){.meeting-toast{bottom:88px;width:max-content}}
+  </style>
+</head>
+<body>
+
+  <!-- ACCESS CODE SCREEN -->
+  <div id="accessScreen" class="access-screen">
+    <div class="access-card">
+
+      <div class="access-eyebrow">
+        2026 KGSF
+      </div>
+
+      <h1>Supplier Directory</h1>
+
+      <p>
+        Please enter the access code provided by KITA
+        to view the supplier directory and submit meeting requests.
+      </p>
+
+      <div class="access-form">
+        <input
+          id="accessCodeInput"
+          type="text"
+          placeholder="Enter your access code"
+          autocomplete="off"
+          spellcheck="false"
+        >
+
+        <button
+          id="accessCodeButton"
+          type="button"
+          onclick="submitAccessCode()"
+        >
+          Continue
+        </button>
+      </div>
+
+      <div
+        id="accessMessage"
+        class="access-message"
+      ></div>
+
+    </div>
+  </div>
+
+  <main class="wrap" id="mainApp" hidden>
+    <section id="directoryView">
+      <h1>2026 KGSF 韩国供应商名录</h1>
+      <p class="sub">
+        2026 Korea Grand Sourcing Fair
+      </p>
+
+      <div class="dev-note">
+        <b>预约洽谈:</b> 请从以下韩国供应商中选择至少20家感兴趣的企业，提交商务洽谈申请。
+      </div>
+
+      <div class="search-panel">
+
+        <div class="search-main">
+          <span class="search-icon">🔍</span>
+
+          <input
+            id="searchInput"
+            class="search-input"
+            type="search"
+            placeholder="搜索企业、产品或认证信息..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-row">
+
+          <select id="categoryFilter" class="filter-select">
+            <option value="">All Categories</option>
+          </select>
+
+          <select id="subcategoryFilter" class="filter-select">
+            <option value="">All Subcategories</option>
+          </select>
+
+          <button
+            id="resetFiltersBtn"
+            class="reset-filter-btn"
+            type="button"
+            onclick="resetFilters()"
+          >
+            ↻ Reset
+          </button>
+        </div>
+
+        <div id="activeFilters" class="active-filters"></div>
+        <div id="resultCount" class="result-count"></div>
+
+      </div>
+
+      <section id="companyGrid" class="grid"></section>
+      <div id="pagination" class="pagination"></div>
+    </section>
+
+    <section id="detailView" class="detail-page" hidden></section>
+  </main>
+
+  <button
+  id="detailTopBtn"
+  class="detail-top-btn"
+  type="button"
+  onclick="scrollDetailToTop()"
+  aria-label="Back to top"
+  title="Back to top">
+  ↑</button>
+  </div>
+
+<script>
+
+const BUYER_CODES = {
+  "민주": "정선아 상간녀",
+  "I2Y4": "Beijing Wanshang Yuncang Technology Co., Ltd.",
+  "I577": "Netops",
+  "I8AE": "Qingmu Tec Co., Ltd.",
+  "IBO6": "Tecdo Technology Co., Ltd.",
+  "IED9": "LinkWin Supply Chain (Shanghai) Co., Ltd.",
+  "IIZ7": "Fortune Cling（Hainan）Supply Chain Co., Ltd.",
+  "IVH2": "Weihai Pumpkin Uncle Trade Co., Ltd.",
+  "J0AL": "Beijing APOUS Trading Co., Ltd.",
+  "J0ET": "Guangzhou Meipo Brand Management Ltd.",
+  "J5PZ": "SS Trading (Shenzhen) Co,.Ltd.",
+  "J7X3": "WOW COLOUR",
+  "JT0P": "Nanjing Baguazhou Cross - border Service Industry Co., Ltd.",
+  "JU7Y": "Hangzhou Highstore Technology Co., Ltd.",
+  "K4LO": "JD.COM",
+  "K9HH": "Hunan Huayou Brand Management Co., Ltd.",
+  "KPC4": "Weihai Royal International Import & Export Co., Ltd.",
+  "KWZ1": "Weihai Nutraway Pharmaceuticals Co, Ltd.",
+  "LEI8": "Beijing Hanguang Department Store",
+  "LVG3": "Chongqing Chongbai Technology Group",
+  "MP1W": "Shandong Youdong International Trade Company",
+  "MSJ7": "WMGS(Shanghai) Co., Ltd.",
+  "N63X": "Hangzhou Yangtuo Network Technology Co., Ltd.",
+  "N9VZ": "Shenzhen Dada Food Co., Ltd.",
+  "CM8V": "Shanghai Manyi Information Science Co., Ltd."
+};
+// Microsoft Forms prefill mapping from the supplied example.
+const FORM_BASE = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx";
+const FORM_ID = "DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAADmwmoJUQ1E0N0JNRTNEOTJYWkZUS1IxRFcxUEJMMS4u";
+const FORM_FIELDS = {
+  buyer: "r110f5d9de2df4f3b9f503c804534d192",
+  products: "ra40586fd435c44d09eaf93aaa188866b",
+  reason: "r208cbd021dfa4d96abce0bcbc00607e4",
+  priority: "r485a6ca3f85743c5bc9a8f9c0b5b66e4",
+  evaluation: "r0c32a85194db4275b3fa55607c5eacbc"
+};
+const EVALUATION_ROW_IDS = ["r07a3cea1b6184ef19bff028cf34290ff","r700f4286680c4eef9ba1bc5b932cf0be","ra690aa61fde545dd9e7a5f44569ef7e0","rf19ce28cfab0491abeec0a72236da373","r623429ceae73410fb638d980652e3b69"];
+// Exact numeric labels and Microsoft Forms option IDs from the five supplied links.
+const SCORE_OPTIONS = {
+  1: {id:1,key:"09e8421c-0c8c-4a5e-aeba-fc0f28c6f13b"},
+  2: {id:3,key:"d5a67c5f-6fb0-41db-ad74-d09f1260735d"},
+  3: {id:2,key:"91a9891b-7842-465f-aea6-bea85b6632d1"},
+  4: {id:5,key:"b3beb5ba-3a1f-4ac0-8bd9-d3b23fd1d365"},
+  5: {id:4,key:"3f8bca30-a0f9-49db-9555-fc6c10f541ed"}
+};
+const REPORT_QUESTIONS = ["产品与采购需求的匹配程度","市场潜力与销售前景","产品差异化及竞争优势","品牌形象、产品设计及包装","产品认证及当地法规合规性"];
+function renderReportMatrix() {
+  const labels = ["1","2","3","4","5"];
+  return `<div class="report-matrix-wrap"><table class="report-matrix"><thead><tr><th>评价项目</th>${labels.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${REPORT_QUESTIONS.map((q,i)=>`<tr><td>${escapeHtml(q)}</td>${labels.map((label,j)=>`<td><label><input type="radio" name="report_${i}" value="${j+1}" aria-label="${escapeAttr(q)}: ${label}"></label></td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+function buildMicrosoftFormUrl(products, reason, priority, scores) {
+  const url = new URL(FORM_BASE);
+  url.searchParams.set("id", FORM_ID);
+  url.searchParams.set(FORM_FIELDS.buyer, currentBuyerCompany);
+  url.searchParams.set(FORM_FIELDS.products, products.join(", "));
+  if (reason) url.searchParams.set(FORM_FIELDS.reason, reason);
+  if (priority) url.searchParams.set(FORM_FIELDS.priority, JSON.stringify(priority === "Yes" ? "是" : "否"));
+  const answers = {};
+  scores.forEach((score, i) => {
+    if (SCORE_OPTIONS[score]) answers[EVALUATION_ROW_IDS[i]] = SCORE_OPTIONS[score];
+  });
+  url.searchParams.set(FORM_FIELDS.evaluation, JSON.stringify(answers));
+  // Microsoft Forms displays literal '+' if URLSearchParams serializes spaces as '+'.
+  return url.toString().replace(/\+/g, "%20");
+}
+
+let companies = [];
+
+function loadCompanies() {
+  fetch("./companies.json", { cache: "no-cache" })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data)) {
+        throw new Error("companies.json must contain a JSON array.");
+      }
+
+      companies = data;
+      initializeFilters();
+      renderCompanies();
+
+      const match = location.hash.match(/^#company=(.+)$/);
+      if (match) {
+        const id = decodeURIComponent(match[1]);
+        const company = companies.find(c => String(c.id) === id);
+        if (company) openCompanyDetail(company.id);
+      }
+    })
+    .catch(error => {
+      console.error("DATA LOAD ERROR:", error);
+      document.getElementById("companyGrid").innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:40px;color:#6b7280">
+          Failed to load companies.json.
+        </div>
+      `;
+    });
+}
+
+function splitMultiValue(value) {
+  return String(value || "")
+    .split(/\r?\n|,\s*/)
+    .map(v => v.trim())
+    .filter(Boolean);
+}
+
+// Product images are uploaded to ./images/ with the product number as filename.
+// Example: images/12345.jpg or images/12345.png
+const IMAGE_EXTENSIONS = ["", ".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".bmp"];
+
+function getProductNumber(product) {
+  return String(product?.id || "").trim();
+}
+
+function productImageMarkup(product, className = "", extraStyle = "") {
+  const number = getProductNumber(product);
+  if (!number) return "";
+
+  const base = `./images/${encodeURIComponent(number)}`;
+
+  return `<img
+    class="${escapeAttr(className)}"
+    src="${escapeAttr(base)}"
+    data-image-base="${escapeAttr(base)}"
+    data-image-ext="0"
+    alt="${escapeAttr(product.name || "")}"
+    loading="lazy"
+    style="${escapeAttr(extraStyle)}"
+    onerror="tryNextProductImage(this)"
+  >`;
+}
+
+function tryNextProductImage(img) {
+  const next = Number(img.dataset.imageExt || 0) + 1;
+
+  if (next >= IMAGE_EXTENSIONS.length) {
+    img.onerror = null;
+    img.remove();
+    return;
+  }
+
+  img.dataset.imageExt = String(next);
+  img.src = img.dataset.imageBase + IMAGE_EXTENSIONS[next];
+}
+
+/* ============================================================
+   3) 상태
+   ============================================================ */
+
+let directoryScrollY = 0;
+let editingCompanyId = null;
+let currentBuyerCode = "";
+let currentBuyerCompany = "";
+let currentPage = 1;
+const ITEMS_PER_PAGE = 15;
+function submitAccessCode() {
+  const code = document.getElementById("accessCodeInput").value.replace(/\s+/g, "").toUpperCase();
+  if (!Object.prototype.hasOwnProperty.call(BUYER_CODES, code)) {
+    document.getElementById("accessMessage").textContent = "Invalid access code. Please check and try again.";
+    return;
+  }
+  currentBuyerCode = code;
+  currentBuyerCompany = BUYER_CODES[code];
+  sessionStorage.setItem("BuyerAccessCode", code);
+  document.getElementById("accessMessage").textContent = "";
+  openDirectory();
+}
+function openDirectory() {
+  document.getElementById("accessScreen").style.display = "none";
+  document.getElementById("mainApp").hidden = false;
+  if (companies.length) renderCompanies();
+}
+
+/* ============================================================
+   4) 기업 카드
+   ============================================================ */
+const CATEGORY_ORDER = [
+  "美容",
+  "食品和饮料",
+  "家居生活",
+  "健康",
+  "数码产品"
+];
+
+const SUBCATEGORY_MAP = {
+  "美容": [
+    "护肤",
+    "彩妆",
+    "护发/身体护理",
+    "美容工具/设备",
+    "时尚"
+  ],
+
+  "食品和饮料": [
+    "零食/即食食品",
+    "饮料/酒精饮料",
+    "配料/调味料/酱料",
+    "农产品和水产品"
+  ],
+
+  "家居生活": [
+    "家居用品",
+    "厨具",
+    "婴儿用品",
+    "宠物用品"
+  ],
+
+  "健康": [
+    "保健产品",
+    "健康功能食品/补充剂",
+    "体育用品",
+    "医疗用品/药品"
+  ],
+
+  "数码产品": [
+    "软件/人工智能/解决方案",
+    "硬件/电子设备",
+    "工业设备/零件/化学品",
+    "内容"
+  ]
+};
+
+function initializeFilters() {
+  const categoryFilter = document.getElementById("categoryFilter");
+  const subcategoryFilter = document.getElementById("subcategoryFilter");
+
+  const availableCategories = new Set(
+    companies.flatMap(company =>
+      company.categories?.main || []
+    )
+  );
+
+  const categories = CATEGORY_ORDER.filter(category =>
+    availableCategories.has(category)
+  );
+
+  categoryFilter.innerHTML =
+    `<option value="">产品大类</option>` +
+    categories
+      .map(category =>
+        `<option value="${escapeAttr(category)}">
+          ${escapeHtml(category)}
+        </option>`
+      )
+      .join("");
+
+  updateSubcategoryOptions();
+
+  document
+    .getElementById("searchInput")
+    .addEventListener("input", () => {
+      currentPage = 1;
+      renderCompanies();
+    });
+
+  categoryFilter.addEventListener("change", () => {
+
+    subcategoryFilter.value = "";
+
+    updateSubcategoryOptions();
+    renderCompanies();
+  });
+
+  subcategoryFilter.addEventListener(
+    "change",
+    renderCompanies
+  );
+}
+
+function updateSubcategoryOptions() {
+  const category =
+    document.getElementById("categoryFilter").value;
+
+  const subcategoryFilter =
+    document.getElementById("subcategoryFilter");
+
+  let subcategories = [];
+
+  if (category) {
+
+    subcategories =
+      SUBCATEGORY_MAP[category] || [];
+
+  } else {
+
+    subcategories =
+      Object.values(SUBCATEGORY_MAP).flat();
+  }
+
+  const availableSubcategories = new Set(
+    companies.flatMap(company =>
+      company.categories?.sub || []
+    )
+  );
+
+  subcategories = subcategories.filter(sub =>
+    availableSubcategories.has(sub)
+  );
+
+  subcategoryFilter.innerHTML =
+    `<option value="">
+      ${category
+        ? `All ${escapeHtml(category)}`
+        : "细分类别"
+      }
+    </option>` +
+    subcategories
+      .map(sub =>
+        `<option value="${escapeAttr(sub)}">
+          ${escapeHtml(sub)}
+        </option>`
+      )
+      .join("");
+}
+
+function resetFilters() {
+
+  document.getElementById("searchInput").value = "";
+  document.getElementById("categoryFilter").value = "";
+
+  updateSubcategoryOptions();
+
+  document.getElementById("subcategoryFilter").value = "";
+
+  renderCompanies();
+}
+
+function renderActiveFilters() {
+
+  const keyword =
+    document.getElementById("searchInput")
+      .value
+      .trim();
+
+  const category =
+    document.getElementById("categoryFilter")
+      .value;
+
+  const subcategory =
+    document.getElementById("subcategoryFilter")
+      .value;
+
+  const container =
+    document.getElementById("activeFilters");
+
+  const chips = [];
+
+  if (keyword) {
+    chips.push(`
+      <button
+        class="filter-chip"
+        type="button"
+        onclick="clearKeywordFilter()"
+      >
+        ${escapeHtml(keyword)} ×
+      </button>
+    `);
+  }
+
+  if (category) {
+    chips.push(`
+      <button
+        class="filter-chip"
+        type="button"
+        onclick="clearCategoryFilter()"
+      >
+        ${escapeHtml(category)} ×
+      </button>
+    `);
+  }
+
+  if (subcategory) {
+    chips.push(`
+      <button
+        class="filter-chip"
+        type="button"
+        onclick="clearSubcategoryFilter()"
+      >
+        ${escapeHtml(subcategory)} ×
+      </button>
+    `);
+  }
+
+  container.innerHTML = chips.join("");
+}
+
+function clearKeywordFilter() {
+  document.getElementById("searchInput").value = "";
+  renderCompanies();
+}
+
+function clearCategoryFilter() {
+  document.getElementById("categoryFilter").value = "";
+
+  updateSubcategoryOptions();
+
+  document.getElementById("subcategoryFilter").value = "";
+
+  renderCompanies();
+}
+
+function clearSubcategoryFilter() {
+  document.getElementById("subcategoryFilter").value = "";
+  renderCompanies();
+}
+
+function getCompanySearchText(company) {
+  const productText = (company.products || [])
+    .map(product => [
+      product.name || "",
+      product.certification || ""
+    ].join(" "))
+    .join(" ");
+
+  return [
+    company.companyName || "",
+    ...(company.categories?.main || []),
+    ...(company.categories?.sub || []),
+    productText
+  ]
+    .join(" ")
+    .toLowerCase();
+}
+
+function getCategoryClass(category) {
+  const map = {
+    "美容": "beauty",
+    "食品和饮料": "food",
+    "家居生活": "home-living",
+    "健康": "healthcare",
+    "数码产品": "digital-industrial"
+  };
+
+  return map[category] || "";
+}
+
+function getFilteredCompanies() {
+
+  const keyword =
+    document
+      .getElementById("searchInput")
+      ?.value
+      .trim()
+      .toLowerCase() || "";
+
+  const category =
+    document
+      .getElementById("categoryFilter")
+      ?.value || "";
+
+  const subcategory =
+    document
+      .getElementById("subcategoryFilter")
+      ?.value || "";
+
+
+  return companies.filter(company => {
+
+    const keywordMatch =
+      !keyword ||
+      getCompanySearchText(company)
+        .includes(keyword);
+
+    const categoryMatch =
+      !category ||
+      (company.categories?.main || [])
+        .includes(category);
+
+    const subcategoryMatch =
+      !subcategory ||
+      (company.categories?.sub || [])
+        .includes(subcategory);
+
+    return (
+      keywordMatch &&
+      categoryMatch &&
+      subcategoryMatch
+    );
+  });
+}
+
+function renderCompanies() {
+
+  const filtered =
+  getFilteredCompanies();
+  renderActiveFilters();
+
+  document.getElementById("resultCount").textContent =
+    `Showing ${filtered.length} of ${companies.length} companies`;
+
+  const grid = document.getElementById("companyGrid");
+
+  if (!filtered.length) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:50px;color:#6b7280">
+        No matching companies found.
+      </div>
+    `;
+
+    document.getElementById("pagination").innerHTML = "";
+    return;
+  }
+
+  const totalPages =
+    Math.ceil(filtered.length / ITEMS_PER_PAGE);
+
+  if (currentPage > totalPages) {
+    currentPage = 1;
+    renderCompanies();
+  }
+
+  const startIndex =
+    (currentPage - 1) * ITEMS_PER_PAGE;
+
+  const paginatedCompanies =
+    filtered.slice(
+     startIndex,
+      startIndex + ITEMS_PER_PAGE
+    );
+
+  grid.innerHTML = paginatedCompanies.map(company => {
+    const productNames = (company.products || [])
+      .filter(p => p && p.name)
+      .map(p => p.name);
+
+      const firstProduct = (company.products || []).find(p => p && getProductNumber(p));
+
+    return `
+      <article class="card">
+        ${firstProduct ? productImageMarkup(firstProduct, "card-product-image") : ""}
+
+       <div class="card-top">
+          <div>
+            ${(company.categories?.main || [])
+              .map(v => `
+                <span class="category ${getCategoryClass(v)}">
+                  ${escapeHtml(v)}
+                </span>
+              `)
+              .join(`<span class="category-separator"> · </span>`)}
+          </div>
+
+
+        </div>
+
+
+        
+        <h3>${escapeHtml(company.companyName || "")}</h3>
+
+        ${(company.categories?.sub || []).length
+         ? `
+           <div class="card-subcategories">
+             ${(company.categories.sub || [])
+               .map(v => `
+                 <span class="card-subcategory">
+                   ${escapeHtml(v)}
+                 </span>
+               `)
+               .join("")}
+           </div>
+         `
+         : ""
+       }
+
+        <div class="product-preview">
+          ▸ ${productNames.slice(0, 3).map(escapeHtml).join("<br>▸ ")}
+          ${productNames.length > 3 ? `<br>+ ${productNames.length - 3} more` : ""}
+        </div>
+
+        <button
+          type="button"
+          class="request-btn"
+          onclick='openCompanyDetail(${JSON.stringify(company.id)})'
+        >
+          查看企业详情
+        </button>
+      </article>
+    `;
+  }).join("");
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+
+  const container =
+    document.getElementById("pagination");
+
+  if (totalPages <= 1) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const PAGES_PER_GROUP = 12;
+
+  const currentGroup =
+    Math.floor((currentPage - 1) / PAGES_PER_GROUP);
+
+  const startPage =
+    currentGroup * PAGES_PER_GROUP + 1;
+
+  const endPage =
+    Math.min(
+      startPage + PAGES_PER_GROUP - 1,
+      totalPages
+    );
+
+  let html = "";
+
+  html += `
+    <button
+      class="page-btn"
+      type="button"
+      onclick="goToPage(${startPage - 1})"
+      ${startPage === 1 ? "disabled" : ""}
+    >
+      ‹
+    </button>
+  `;
+
+  for (
+    let page = startPage;
+    page <= endPage;
+    page++
+  ) {
+
+    html += `
+      <button
+        class="page-btn ${page === currentPage ? "active" : ""}"
+        type="button"
+        onclick="goToPage(${page})"
+      >
+        ${page}
+      </button>
+    `;
+  }
+
+
+  html += `
+    <button
+      class="page-btn"
+      type="button"
+      onclick="goToPage(${endPage + 1})"
+      ${endPage === totalPages ? "disabled" : ""}
+    >
+      ›
+    </button>
+  `;
+
+
+  container.innerHTML = html;
+}
+
+function goToPage(page) {
+
+  const totalPages =
+    Math.ceil(
+      getFilteredCompanies().length /
+      ITEMS_PER_PAGE
+    );
+
+  if (
+    page < 1 ||
+    page > totalPages
+  ) {
+    return;
+  }
+
+  currentPage = page;
+
+  renderCompanies();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+function openCompanyDetail(companyId, addHistory = true) {
+  const company = companies.find(c => c.id === companyId);
+  if (!company) return;
+
+    const directoryView = document.getElementById("directoryView");
+
+      if (!directoryView.hidden) {
+        directoryScrollY = window.scrollY;
+      }
+
+  editingCompanyId = company.id;
+  const detail = document.getElementById("detailView");
+
+  const categoryChips = (company.categories?.main || [])
+    .map(v => `<span class="detail-chip">${escapeHtml(v)}</span>`)
+    .join("");
+
+  const subcategoryChips = (company.categories?.sub || [])
+    .map(v => `<span class="detail-chip">${escapeHtml(v)}</span>`)
+    .join("");
+
+  const productCards = (company.products || []).map(product => {
+    const certs = Array.isArray(product.certification)
+      ? product.certification
+      : String(product.certification || "").split(/\r?\n|,\s*|\s+\.\s+/).map(v => v.trim()).filter(Boolean);
+
+    return `
+      <article class="detail-product">
+        ${productImageMarkup(product, "", "width:100%;max-height:320px;object-fit:contain;border-radius:14px;margin-bottom:16px;background:#f8f9fa;")}
+
+        <h4>${escapeHtml(product.name || "")}</h4>
+        ${product.description ? `<div class="detail-desc">${escapeHtml(product.description)}</div>` : ""}
+        ${product.hsCode ? `<div style="font-size:13px;color:#6b7280;margin-top:10px;"> <b>HS Code:</b> ${escapeHtml(product.hsCode)}</div>`: ""}
+        ${certs.length
+          ? `<div class="cert-list">${certs.map(c => `<span class="cert-badge">${escapeHtml(c)}</span>`).join("")}</div>`
+          : ""
+        }
+      </article>
+    `;
+  }).join("");
+
+  const websites = splitMultiValue(company.website);
+  const subpages = splitMultiValue(company.subpage);
+  const catalogs = splitMultiValue(company.catalog);
+  const videos = splitMultiValue(company.video);
+
+  detail.innerHTML = `
+    <div class="detail-topbar">
+       <button class="back-btn" type="button" onclick="backToDirectory()">← 返回企业列表</button>
+       <button class="detail-request-btn" type="button" onclick="scrollToMeetingRequest()">申请洽谈</button>
+     </div>
+
+    <div class="detail-chips">${categoryChips}${subcategoryChips}</div>
+    <h2 class="detail-title">${escapeHtml(company.companyName || "")}</h2>
+
+    <div class="detail-grid">
+      <div class="detail-info">
+        <small>业务类型</small>
+        <div>${escapeHtml(company.businessField || "-")}</div>
+      </div>
+      <div class="detail-info">
+        <small>OEM / ODM</small>
+        <div>${escapeHtml(company.oemOdm || "-")}</div>
+      </div>
+    </div>
+
+   ${(websites.length || catalogs.length || videos.length)
+     ? `
+       <div class="detail-links">
+         ${websites.map((url, i) =>
+           `<a href="${escapeAttr(url)}"
+               target="_blank"
+               rel="noopener noreferrer">
+             ${websites.length > 1 ? `Website ${i + 1}` : "企业官网"} ↗
+           </a>`
+         ).join("")}
+
+         ${catalogs.map((url, i) =>
+           `<a href="${escapeAttr(url)}"
+               target="_blank"
+               rel="noopener noreferrer">
+          ${catalogs.length > 1 ? `产品目录 (需VPN翻墙) ${i + 1}` : "产品目录 (需VPN翻墙)"} ↗
+           </a>`
+         ).join("")}
+
+         ${videos.map((url, i) =>
+           `<a href="${escapeAttr(url)}"
+               target="_blank"
+               rel="noopener noreferrer">
+             ${videos.length > 1 ? `宣传视频 (需VPN翻墙) ${i + 1}` : "宣传视频 (需VPN翻墙)"} ↗
+           </a>`
+         ).join("")}
+       </div>
+     `
+     : ""
+   }
+
+${subpages.length
+  ? `
+    <div class="detail-subpages">
+      <div class="detail-subpage-label">线上销售渠道</div>
+
+      ${subpages.map(url => `
+        <a
+          href="${escapeAttr(url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${escapeHtml(url)}
+        </a>
+      `).join("")}
+    </div>
+  `
+  : ""
+}
+
+    <h3 style="margin-top:30px">产品展示</h3>
+    <div class="detail-products">${productCards || "<p>No product information.</p>"}</div>
+     <section id="meetingRequestSection" class="inline-request-section">
+       <h3>申请洽谈</h3>
+       <p class="help">请选择感兴趣的产品，并填写洽谈需求。</p>
+       <div class="inline-request-fields">
+         <label class="field-label">感兴趣的产品</label>
+         <p class="help">请选择您希望进一步了解的产品（可多选）。</p>
+         <div id="productCheckboxes" class="check-list">
+           ${(company.products || []).filter(p => p && p.name).map(product => `<label class="check-item"><input type="checkbox" name="meetingProduct" value="${escapeAttr(product.name)}"><span>${escapeHtml(product.name)}</span></label>`).join("")}
+         </div>
+         <label class="field-label" for="reasonInput">感兴趣的原因</label>
+         <p class="help">请简单说明您希望与该企业洽谈的原因。</p>
+         <textarea id="reasonInput" placeholder="请填写您感兴趣的原因或具体采购需求。"></textarea>
+         <label class="field-label" style="margin-top:24px">是否希望优先安排与该企业洽谈？</label>
+         <p class="help">最多可选择5家企业优先安排洽谈。</p>
+         <div class="radio-row">
+           <label class="radio-item"><input type="radio" name="priority" value="Yes"><span>是</span></label>
+           <label class="radio-item"><input type="radio" name="priority" value="No"><span>否</span></label>
+         </div>
+         <label class="field-label" style="margin-top:28px">企业评价</label>
+         <p class="help">请根据所提供的企业及产品信息，对以下各项指标进行评分。<strong>评分标准：1分表示“非常低”，5分表示“非常高”。</strong><br>您的评价将以匿名形式汇总，并在活动结束后作为综合评价报告提供给韩国企业。<br><i>*所有评价项目均为必填项。</i></p>
+         ${renderReportMatrix()}
+         <button class="btn primary inline-save-btn" type="button" onclick="openMicrosoftRequest()">前往提交 ↗</button>
+         <p class="help" style="margin-top:14px">系统将自动填写您所填的内容。请在打开的 Microsoft Forms 页面中点击“提交”，以完成洽谈申请。</p>
+       </div>
+     </section>
+
+  `;
+
+  document.getElementById("directoryView").hidden = true;
+  detail.hidden = false;
+  document.getElementById("detailTopBtn").classList.add("show");
+
+  
+window.scrollTo({ top: 0, behavior: "smooth" });
+
+if (addHistory) {
+  history.pushState(
+    { companyId },
+    "",
+    `#company=${encodeURIComponent(companyId)}`
+  );
+}
+}
+
+
+function backToDirectory(pushHistory = true) {
+  const detailView = document.getElementById("detailView");
+  const directoryView = document.getElementById("directoryView");
+
+  detailView.hidden = true;
+  directoryView.hidden = false;
+  document.getElementById("detailTopBtn").classList.remove("show");
+
+  if (pushHistory && location.hash.startsWith("#company=")) {
+    history.pushState(
+      {},
+      "",
+      location.pathname + location.search
+    );
+  }
+
+  requestAnimationFrame(() => {
+    window.scrollTo({
+      top: directoryScrollY,
+      left: 0,
+      behavior: "auto"
+    });
+  });
+}
+
+window.addEventListener("popstate", () => {
+  const match = location.hash.match(/^#company=(.+)$/);
+
+  if (match) {
+    const id = decodeURIComponent(match[1]);
+    const company = companies.find(c => String(c.id) === id);
+    if (company) openCompanyDetail(company.id);
+  } else {
+    backToDirectory(false);
+  }
+});
+
+
+/* Direct Microsoft Forms link — no cart or Google Apps Script. */
+function scrollToMeetingRequest() {
+  document.getElementById("meetingRequestSection")?.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function openMicrosoftRequest() {
+  const company = companies.find(c => c.id === editingCompanyId);
+  if (!company) return;
+  const products = [...document.querySelectorAll('input[name="meetingProduct"]:checked')].map(el => el.value);
+  const reason = document.getElementById("reasonInput")?.value.trim() || "";
+  const priority = document.querySelector('input[name="priority"]:checked')?.value || "";
+  const scores = REPORT_QUESTIONS.map((_,i) => Number(document.querySelector(`input[name="report_${i}"]:checked`)?.value || 0));
+  if (!products.length) { alert("Please select at least one interested product."); return; }
+  if (!priority) { alert("Please select Yes or No for priority matching."); return; }
+  if (scores.some(v => !v)) { alert("Please complete all five company evaluation criteria."); return; }
+  const url = buildMicrosoftFormUrl(products, reason, priority, scores);
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value);
+}
+
+function scrollDetailToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+
+loadCompanies();
+
+const savedAccessCode = sessionStorage.getItem("BuyerAccessCode");
+if (savedAccessCode && Object.prototype.hasOwnProperty.call(BUYER_CODES, savedAccessCode)) {
+  currentBuyerCode = savedAccessCode;
+  currentBuyerCompany = BUYER_CODES[savedAccessCode];
+  openDirectory();
+}
+document.getElementById("accessCodeInput").addEventListener("keydown", event => {
+  if (event.key === "Enter") submitAccessCode();
+});
+</script>
+</body>
+</html>
